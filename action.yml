@@ -1,0 +1,26 @@
+name: Create env file from Vault
+author: César Vergara <cvergarae@smu.cl>
+branding:
+  icon: upload-cloud
+  color: orange
+description: Read Consul KV DB and create files needed for ansible to create an AWS EKS cluster
+inputs:
+  vault_address:
+    description: Vault address
+    required: true
+  vault_namespace:
+    description: Vault Namespace
+    required: false
+  vault_token:
+    description: Vault Token for authentication
+    required: true
+  base_path:
+    description: Prefix for reading data
+    required: true
+  env_filename:
+    description: Filename for storing env file for ansible
+    default: ".env_file"
+    required: false
+runs:
+  using: docker
+  image: Dockerfile
