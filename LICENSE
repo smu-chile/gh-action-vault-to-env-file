@@ -1,8 +1,3 @@
-  #   prefix: polymathes/infrastructure/terraform-aws-eks-frontend/prod
-  #   excludes: terraform-state,id-rsa,id-rsa-pub,sealed-secret-key,sealed-secret-certificate,ssh-deploy-public-key,ssh-deploy-private-key,config-map-aws-auth,kubeconfig,public-key,external-dns-deployment,private-subnets,public-subnets,terraform-state
-  #   consul_port: 443
-  #   consul_ssl: true
-
 MIT License
 
 Copyright (c) 2019 Lars
