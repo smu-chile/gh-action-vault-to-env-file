@@ -15,4 +15,4 @@ RUN curl "${CONSUL_TEMPLATE_URL}" -L -o "consul-template_${CONSUL_TEMPLATE_VERSI
 ADD entrypoint.sh /entrypoint.sh
 RUN ["chmod", "+x", "/entrypoint.sh"]
 
-#  ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
