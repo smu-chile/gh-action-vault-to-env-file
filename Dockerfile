@@ -12,7 +12,7 @@ RUN curl "${CONSUL_TEMPLATE_URL}" -L -o "consul-template_${CONSUL_TEMPLATE_VERSI
     rm -rf consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip && \
     rm -rf /var/cache/apk/*
 
-ADD entrypoint.sh /entrypoint.sh
-RUN ["chmod", "+x", "/entrypoint.sh"]
+ADD entrypoint.sh entrypoint.sh
+RUN ["chmod", "+x", "entrypoint.sh"]
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
