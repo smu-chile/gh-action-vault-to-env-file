@@ -15,6 +15,6 @@ RUN curl "${CONSUL_TEMPLATE_URL}" -L -o "/consul-template_${CONSUL_TEMPLATE_VERS
 ADD entrypoint.sh /entrypoint.sh
 RUN ["chmod", "+x", "/entrypoint.sh"]
 
-RUN apk add --no-cache 'curl' 'unzip' 'bash'
+RUN ls
 
 ENTRYPOINT ["/entrypoint.sh"]
