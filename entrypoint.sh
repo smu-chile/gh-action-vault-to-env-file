@@ -9,6 +9,8 @@
 
 set -e
 
+cd /
+
 function main() {    
   echo "Validating required params..."
   sanitize "${INPUT_SECRET_PATHS}" "secret_paths"
