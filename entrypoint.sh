@@ -41,7 +41,6 @@ function main() {
 {{ end }}{{ end }}
 EOT
   done
-  ls -al
   consul-template -template="./env.tmpl:./${INPUT_ENV_FILENAME}" -config ./config/config.hcl -once -log-level info
   
 }
