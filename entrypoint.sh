@@ -40,7 +40,7 @@ function main() {
 EOT
   done
 
-  ./consul-template -template="./env.tmpl:./${INPUT_ENV_FILENAME}" -config ./config/config.hcl -once -log-level info
+  consul-template -template="./env.tmpl:./${INPUT_ENV_FILENAME}" -config ./config/config.hcl -once -log-level info
   
 }
 
