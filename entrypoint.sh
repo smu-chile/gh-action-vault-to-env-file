@@ -41,7 +41,7 @@ function main() {
 {{ end }}{{ end }}
 EOT
   done
-  consul-template -template="./env.tmpl:./github/workspace/${INPUT_ENV_FILENAME}" -config ./config/config.hcl -once -log-level info
+  consul-template -template="./env.tmpl:./github/workflow/${INPUT_ENV_FILENAME}" -config ./config/config.hcl -once -log-level info
   
 }
 
