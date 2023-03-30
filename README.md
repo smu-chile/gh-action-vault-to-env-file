@@ -1,4 +1,4 @@
-# Github action, reads KV from consul and write envfile, to be imported with source command
+# Github action, reads KV from vault and write envfile, to be imported with source command
 
 This Action allows you to create an enviroment variable file to be with source.
 
