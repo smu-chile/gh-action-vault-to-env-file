@@ -1,7 +1,7 @@
 
 FROM alpine:3.17
           
-RUN apk add --no-cache 'curl' 'unzip' 'bash'
+RUN apk add --no-cache 'curl' 'unzip' 'bash' 'jq'
 
 ARG CONSUL_TEMPLATE_VERSION=0.29.5
 ARG CONSUL_TEMPLATE_URL="https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip"
