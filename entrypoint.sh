@@ -29,6 +29,8 @@ function main() {
   #########################
   export VAULT_ADDR="$INPUT_VAULT_ADDR"
   export VAULT_TOKEN="$INPUT_VAULT_TOKEN"
+  export FILE_FORMAT="$INPUT_FILE_FORMAT"
+  export FILE_NAME="$INPUT_FILE_NAME"
 
   if [ -n "${INPUT_VAULT_NAMESPACE}" ]; then
     export VAULT_NAMESPACE="$INPUT_VAULT_NAMESPACE"
@@ -43,33 +45,33 @@ function main() {
   for i in "${arr_base_paths[@]}"
   do
 
-  if [ "$INPUT_FILE_FORMAT" == "env" ] ; then
+  if [ "$FILE_FORMAT" == "env" ] ; then
   cat <<EOT >> env.tmpl
 {{ with secret "$i" }}{{ range \$k, \$v := .Data.data }}export {{ \$k | replaceAll "-" "_" | replaceAll " " "_" | toUpper }}='{{ \$v }}'
 {{ end }}{{ end }}
 EOT
   fi
 
-  if [ "$INPUT_FILE_FORMAT" == "toJson" ] ; then
+  if [ "$FILE_FORMAT" == "toJson" ] ; then
   cat <<EOT >> env.tmpl
 {{ with secret "$i" }}{{ range \$k, \$v := .Data.data }}{{ \$k }}={{ \$v }}
 {{ end }}{{ end }}
 EOT
   fi;
 
-  if [ "$INPUT_FILE_FORMAT" == "json" ] ; then
+  if [ "$FILE_FORMAT" == "json" ] ; then
   cat <<EOT >> env.tmpl
 {{ with secret "$i" }}{{ range \$k, \$v := .Data.data }}{{ \$v }}
 {{ end }}{{ end }}
 EOT
   fi;
   done
-  consul-template -template="./env.tmpl:./github/workflow/${INPUT_FILE_NAME}" -config ./config/config.hcl -once -log-level info
+  consul-template -template="./env.tmpl:./github/workflow/${FILE_NAME}" -config ./config/config.hcl -once -log-level info
   
 
-  if [ "$INPUT_FILE_FORMAT" == "toJson" ] ; then
+  if [ "$FILE_FORMAT" == "toJson" ] ; then
     a=$(jq -Rn '[inputs | capture("(?<key>[^=]+)=(?<value>.*)") | { (.key): .value }] | add' ./github/workflow/${INPUT_FILE_NAME}) 
-    echo $a > ./github/workflow/${INPUT_FILE_NAME}
+    echo $a > ./github/workflow/${FILE_NAME}
   fi
 }
 
