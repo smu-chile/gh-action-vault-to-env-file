@@ -15,8 +15,8 @@ export FOO='BAR'
 ## Parameters
 | Parameter | Type | Default | Description | Example |
 |-----------|------|---------|-------------|-------------|
-| `file_name` | `string` | `.env_file` | Filename of output secrets | .env |
-| `file_format` | `string` | `` | Format of the contents | toJson |
+| `env_filename` | `string` | `.env_file` | Output - Filename of enviromental variables | .env |
+| `file_format` | `string` | `env` | Format of the contents, can be `env`, `json` or `toJson` | toJson |
 | `vault_secret_paths` | `string` | `` |  Path to secret in Vault, can be multiple secrets separated by space | kv/app/develop/input kv/app/develop/output | 
 | `vault_token` | `string` | `` | Vault Token | |
 | `vault_address` | `string` | | URL Vault | https://vault:8200 |
@@ -41,7 +41,7 @@ jobs:
         vault_token: <vault_token>
         vault_namepsace: <vault_namepsace>
         vault_secret_paths: <separated by space paths>
-        file_name: <output filename> 
+        env_filename: <output filename> 
         file_format: <content format>
 ```
 
@@ -55,7 +55,7 @@ INPUT_VAULT_ADDR=<Vault address>
 INPUT_VAULT_TOKEN=<Vault token>
 INPUT_VAULT_NAMESPACE=<Vault namespace>
 INPUT_SECRET_PATHS=<Paths to secrets in vault separated by commas>
-INPUT_FILE_NAME=<Name of the output file with the secrets>
+INPUT_ENV_FILENAME=<Name of the output file with the secrets>
 INPUT_FILE_FORMAT=<Content type of the output. Could be toJson, json or env>
 `````
 

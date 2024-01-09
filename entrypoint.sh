@@ -17,11 +17,11 @@ function main() {
   sanitize "${INPUT_VAULT_TOKEN}" "vault_token"
   sanitize "${INPUT_VAULT_ADDR}" "vault_addr"
   sanitize "${INPUT_FILE_FORMAT}" "file_format"
-  sanitize "${INPUT_FILE_NAME}" "file_name"
+  sanitize "${INPUT_ENV_FILENAME}" "file_name"
 
   if [ "$INPUT_FILE_FORMAT" != "json" ] && [ "$INPUT_FILE_FORMAT" != "toJson" ] && [ "$INPUT_FILE_FORMAT" != "env" ] ; then
-    echo "Must select 'env' or 'json' or 'toJson' as valid values"
-    exit 1
+    echo "Using default file format"
+    INPUT_FILE_FORMAT="env"
   fi;
 
   #########################
@@ -30,7 +30,7 @@ function main() {
   export VAULT_ADDR="$INPUT_VAULT_ADDR"
   export VAULT_TOKEN="$INPUT_VAULT_TOKEN"
   export FILE_FORMAT="$INPUT_FILE_FORMAT"
-  export FILE_NAME="$INPUT_FILE_NAME"
+  export FILE_NAME="$INPUT_ENV_FILENAME"
 
   if [ -n "${INPUT_VAULT_NAMESPACE}" ]; then
     export VAULT_NAMESPACE="$INPUT_VAULT_NAMESPACE"
@@ -70,7 +70,7 @@ EOT
   
 
   if [ "$FILE_FORMAT" == "toJson" ] ; then
-    a=$(jq -Rn '[inputs | capture("(?<key>[^=]+)=(?<value>.*)") | { (.key): .value }] | add' ./github/workflow/${INPUT_FILE_NAME}) 
+    a=$(jq -Rn '[inputs | capture("(?<key>[^=]+)=(?<value>.*)") | { (.key): .value }] | add' ./github/workflow/${FILE_NAME}) 
     echo $a > ./github/workflow/${FILE_NAME}
   fi
 }
